@@ -7,6 +7,7 @@ jobs:
   run_code_coverage:
     name: Coverage
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - name: Get PR branch
         uses: xt0rted/pull-request-comment-branch@v1
