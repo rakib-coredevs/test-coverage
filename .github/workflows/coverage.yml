@@ -32,8 +32,8 @@ jobs:
         with:
           script: |
             const { exec: execute } = require('node:child_process');
-            
-            await execute('npm run test', async (err, stdout, stderr) => {
+
+            await execute('./node_modules/jest/bin/jest.js --coverage --coverageReporters="clover"', async (err, stdout, stderr) => {
               let message = '';
               if (!err && stdout) {
                 message = `# Coverage Report ⛱: \n\n\`\`\`${stdout}\`\`\``;
