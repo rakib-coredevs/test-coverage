@@ -22,6 +22,9 @@ jobs:
         with:
           node-version: 16
 
+      - name: Install Dependencies
+        run: npm install
+
       - name: Add comment to PR
         uses: actions/github-script@v6
         if: always()
