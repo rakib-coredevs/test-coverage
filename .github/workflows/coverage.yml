@@ -12,13 +12,6 @@ jobs:
         uses: xt0rted/pull-request-comment-branch@v1
         id: comment-branch
 
-      - name: Set latest commit status as pending
-        uses: myrotvorets/set-commit-status-action@master
-        with:
-          sha: ${{ steps.comment-branch.outputs.head_sha }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          status: pending
-
       - name: Checkout PR branch
         uses: actions/checkout@v3
         with:
@@ -34,9 +27,9 @@ jobs:
         if: always()
         with:
           script: |
-            const { exec: execute } = require('child_process');
+            const { exec: execute } = require('node:child_process');
 
-            execute('npm run test', (err, stdout, stderr) => {
+            execute('npm run test', async (err, stdout, stderr) => {
               const message = `Output: \n\n\`\`\`${stdout}\`\`\`\n\nErrors: \n\n\`\`\`${stderr}\`\`\``;
 
               await github.rest.issues.createComment({
